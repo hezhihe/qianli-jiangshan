@@ -19,11 +19,16 @@ Three.js 粒子山水沉浸页。无构建依赖，静态部署即可。
 
 ## 本地预览
 
+双击项目根目录的 `启动预览.command`，或手动：
+
 ```bash
-cd site
-python3 -m http.server 8090
-# 打开 http://127.0.0.1:8090
+cd 千里江山社交名片   # 项目根（serve.py 所在层）
+python3 serve.py 8899
+# 打开 http://127.0.0.1:8899/site/index.html
 ```
+
+`serve.py` 发送 `Cache-Control: no-store`——改代码刷新即生效，**不再需要手动升版本号**。
+（旧缓存过渡：若刷新后白屏报错，按一次 Cmd+Shift+R 强制刷新。）
 
 ## 部署
 
@@ -61,3 +66,28 @@ python3 -m http.server 8090
 映射区间在 `src/js/gestures.js` 的 `MAP` 常量里：openness/palmSize 张合与远近范围、openWeight 两者权重、rotateRate 旋转速度（rad/s）、rotateLimit 旋转上限（±0.7 rad ≈ ±40°）、rotateDeadZone 中央死区、rotateRange 有效活动半宽。嫌转太快调 rotateRate，嫌角度范围不够调 rotateLimit。精度要点：selfieMode 对齐镜像坐标、modelComplexity 1 减少丢帧、手势模式下 controls 缓动加速 5 倍让镜头跟手。
 
 注意：摄像头权限要求 `localhost` 或 HTTPS 环境（GitHub Pages / Vercel 均满足）。Phase 2 待办：宣纸纹理叠加层、印章字体质感升级。
+
+## 代码结构（维护指南）
+
+```
+site/
+  index.html          入口：HUD 结构、audio 元素、资源引用（无版本查询参数）
+  src/css/styles.css  全部样式（含宣纸层/印章/预览窗）
+  src/js/
+    config.js         唯一参数中心：机位/地形尺度/粒子分档/配色/镜头/涟漪/音频
+    app.js            应用主类：场景、粒子几何、UI 绑定、音乐、涟漪、帧率降档
+    shaders.js        山河顶点/片元着色器（噪声地形 + 金河 + 墨晕波环）
+    landmarks.js      云雾带/峰顶云/水汽/飞鸟特效层
+    controls.js       镜头缓动（手势模式自动提速）、鼠标视差、滚轮缩放
+    gestures.js       MediaPipe 手势（懒加载 + onError 回调 + 调试挂载点）
+  assets/zhiwo.mp3    背景音乐《知我》
+  vendor/three.min.js Three.js
+```
+
+维护约定：
+
+- **改参数只动 config.js**，app.js 不含魔法数字（机位/音量/涟漪强度都在配置里）
+- **改任何 JS 后直接刷新**（serve.py 已防缓存）；生产部署平台（Vercel/GH Pages）自带 etag 协商
+- 手势启动失败的 UI 复位走 `GestureController` 的 `onError` 回调，不要用文本匹配状态
+- 版本控制：项目根已 `git init`，改动前先提交一次（`references/` 已忽略）
+- 调试：页面控制台可用 `window.__GestureController` 直接构造手势类做单元测试，`window.__qianliApp` 暴露应用实例
