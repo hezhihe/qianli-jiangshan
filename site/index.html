@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>千里江山 · 粒子山河</title>
+  <meta name="description" content="A WebGL particle landscape inspired by A Thousand Li of Rivers and Mountains." />
+  <meta name="theme-color" content="#000307" />
+  <link rel="stylesheet" href="./src/css/styles.css" />
+  <script src="./vendor/three.min.js"></script>
+</head>
+<body>
+  <main id="app" aria-label="千里江山粒子山河沉浸式预览">
+    <canvas id="stage" aria-hidden="true"></canvas>
+    <div class="paper" aria-hidden="true"></div>
+
+    <section class="hud" aria-label="作品说明">
+      <p class="eyebrow">QIANLI JIANGSHAN / WEBGL CREATION</p>
+      <header class="title-head">
+        <h1>千里江山<br><span>粒子山河</span></h1>
+        <span class="seal" aria-hidden="true">千里江山</span>
+      </header>
+      <div class="verse" aria-label="观千里江山图题诗">
+        <p class="verse-title">观千里江山图</p>
+        <p>千峰叠翠镇苍穹，万里沧江贯禹东。</p>
+        <p>一纸丹青横九域，千秋浩气壮神州。</p>
+      </div>
+      <div class="actions">
+        <button id="fullscreen-btn" type="button">进入全屏沉浸</button>
+        <button id="reset-btn" type="button" class="ghost">归正视角</button>
+      </div>
+      <button id="music-btn" type="button" class="music-btn">♪ 播放背景音乐</button>
+      <button id="gesture-btn" type="button" class="gesture-btn">开启手势控制</button>
+      <p class="gesture-status" id="gesture-status" aria-live="polite"></p>
+      <p class="hint">移动鼠标控制镜头；滚轮推进；点击山河泛起墨晕；空格暂停/继续。<br />开启手势后：张开手掌或靠近镜头放大，握拳或远离缩小，手掌偏向左右持续旋转视角（回中即停）。</p>
+    </section>
+
+    <aside class="poem" aria-hidden="true">
+      <span>石青入峰</span>
+      <span>石绿生烟</span>
+      <span>金水行谷</span>
+    </aside>
+
+    <audio id="bgm" src="./assets/zhiwo.mp3" loop preload="none"></audio>
+
+    <div class="gesture-preview" id="gesture-preview" hidden>
+      <video id="gesture-video" playsinline muted></video>
+      <canvas id="gesture-overlay"></canvas>
+    </div>
+
+    <div id="loading" class="loading" role="status">铺展长卷中…</div>
+  </main>
+
+  <script type="module" src="./src/js/app.js"></script>
+</body>
+</html>

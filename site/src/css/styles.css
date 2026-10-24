@@ -1,0 +1,352 @@
+:root {
+  --ink: #000307;
+  --ink-soft: rgba(0, 6, 11, 0.72);
+  --jade: #0b6a74;
+  --cyan-stone: #2ee6cf;
+  --mountain-deep: #001a30;
+  --gold: #f5cf3a;
+  --cinnabar: #b03a2e;
+  --paper: #e9f8f6;
+  --mist: rgba(174, 242, 232, 0.66);
+  --line: rgba(46, 230, 207, 0.22);
+}
+
+* { box-sizing: border-box; }
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 74% 34%, rgba(46, 230, 207, 0.14) 0%, transparent 24%),
+    radial-gradient(circle at 43% 58%, rgba(245, 207, 58, 0.08) 0%, transparent 18%),
+    radial-gradient(circle at 52% 48%, #00111d 0%, #000307 56%, #000 100%);
+  color: var(--paper);
+  font-family: "STKaiti", "KaiTi", "Songti SC", serif;
+}
+
+#stage {
+  position: fixed;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#app::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.74), transparent 22%, transparent 72%, rgba(0,0,0,0.64)),
+    radial-gradient(circle at 58% 18%, rgba(46,230,207,0.18), transparent 32%),
+    radial-gradient(circle at 65% 78%, rgba(245,207,58,0.07), transparent 22%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 5px);
+  mix-blend-mode: screen;
+  opacity: 0.75;
+}
+
+#app::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.52'/%3E%3C/svg%3E");
+  animation: grainDrift 14s steps(4) infinite;
+}
+
+/* 宣纸层：横向长纤维 + 细噪 + 边角暖晕，全部低透明度，只加"纸感"不改主调 */
+#app .paper {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(233, 220, 190, 0.028) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(233, 220, 190, 0.02) 0 1px, transparent 1px 7px),
+    radial-gradient(ellipse at 8% 6%, rgba(160, 120, 60, 0.10) 0%, transparent 34%),
+    radial-gradient(ellipse at 94% 94%, rgba(160, 120, 60, 0.10) 0%, transparent 34%),
+    radial-gradient(ellipse at 90% 8%, rgba(160, 120, 60, 0.06) 0%, transparent 28%),
+    radial-gradient(ellipse at 10% 92%, rgba(160, 120, 60, 0.06) 0%, transparent 28%);
+}
+
+.hud {
+  position: fixed;
+  left: clamp(18px, 3vw, 46px);
+  top: clamp(18px, 4vh, 54px);
+  z-index: 5;
+  width: min(360px, calc(100vw - 36px));
+  padding: 22px 24px 20px;
+  border: 1px solid var(--line);
+  background: linear-gradient(135deg, rgba(0, 6, 11, 0.86), rgba(0, 26, 48, 0.46));
+  box-shadow:
+    0 22px 70px rgba(0, 0, 0, 0.56),
+    0 0 80px rgba(46, 230, 207, 0.08),
+    inset 0 0 44px rgba(46, 230, 207, 0.035);
+  backdrop-filter: blur(14px);
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--gold);
+  font: 11px/1.4 "Segoe UI", sans-serif;
+  letter-spacing: 0.22em;
+}
+
+.title-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+h1 {
+  margin: 0;
+  font-weight: 500;
+  font-size: clamp(36px, 4.4vw, 56px);
+  line-height: 1.04;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 24px rgba(46, 230, 207, 0.24);
+}
+
+h1 span {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(245, 207, 58, 0.86);
+  text-shadow: none;
+}
+
+/* 朱砂装饰印章 */
+.seal {
+  flex: none;
+  margin-top: 8px;
+  padding: 7px 6px;
+  width: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  word-break: break-all;
+  line-height: 1.15;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  color: #f7ecd8;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.16), transparent 42%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='48' height='48' filter='url(%23s)' opacity='.18'/%3E%3C/svg%3E"),
+    linear-gradient(160deg, #c0473a 0%, #a63328 58%, #8f2a20 100%);
+  border-radius: 5px 6px 4px 7px;
+  box-shadow:
+    inset 0 0 10px rgba(60, 8, 4, 0.72),
+    inset 0 0 2px rgba(255, 235, 210, 0.35),
+    0 3px 14px rgba(176, 58, 46, 0.4);
+  transform: rotate(2.4deg);
+}
+
+.verse,
+.hint {
+  color: rgba(233, 248, 246, 0.72);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.verse {
+  position: relative;
+  margin: 20px 0;
+  padding: 14px 18px 14px 20px;
+  border-left: 1px solid rgba(245, 207, 58, 0.62);
+  background:
+    linear-gradient(90deg, rgba(245, 207, 58, 0.075), transparent 68%),
+    linear-gradient(180deg, rgba(46, 230, 207, 0.055), rgba(0, 0, 0, 0));
+  box-shadow: inset 0 0 28px rgba(46, 230, 207, 0.035);
+}
+
+.verse::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(245, 207, 58, 0.28);
+  opacity: 0.52;
+  transform: rotate(45deg);
+}
+
+.verse-title {
+  margin: 0 0 8px;
+  color: var(--gold);
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+}
+
+.verse p:not(.verse-title) {
+  margin: 0;
+  color: rgba(233, 248, 246, 0.82);
+  font-size: 16px;
+  line-height: 1.85;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 18px rgba(46, 230, 207, 0.14);
+}
+
+.hint { margin: 14px 0 0; font-size: 12px; }
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 0.72fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  min-height: 38px;
+  border: 1px solid rgba(245, 207, 58, 0.72);
+  background: rgba(245, 207, 58, 0.08);
+  color: var(--gold);
+  cursor: pointer;
+  font: 12px/1 "Segoe UI", sans-serif;
+  letter-spacing: 0.12em;
+  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  background: rgba(245, 207, 58, 0.16);
+  box-shadow: 0 0 24px rgba(245, 207, 58, 0.22);
+}
+
+button.ghost {
+  border-color: rgba(46, 230, 207, 0.46);
+  color: var(--cyan-stone);
+  background: rgba(46, 230, 207, 0.06);
+}
+
+/* 手势控制 */
+.music-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.gesture-btn {
+  width: 100%;
+  margin-top: 8px;
+  border-color: rgba(46, 230, 207, 0.46);
+  color: var(--cyan-stone);
+  background: rgba(46, 230, 207, 0.06);
+}
+
+.gesture-btn:hover {
+  background: rgba(46, 230, 207, 0.14);
+  box-shadow: 0 0 24px rgba(46, 230, 207, 0.22);
+}
+
+.gesture-status {
+  margin: 8px 0 0;
+  min-height: 16px;
+  color: rgba(233, 248, 246, 0.66);
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+}
+
+.gesture-preview {
+  position: fixed;
+  right: clamp(18px, 3vw, 42px);
+  bottom: clamp(18px, 4vh, 42px);
+  z-index: 6;
+  width: 176px;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--line);
+  background: rgba(0, 6, 11, 0.9);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+}
+
+.gesture-preview video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* 仅镜像视频：符合照镜子直觉 */
+}
+
+/* 关键点画布不镜像：selfieMode 已把坐标翻转到镜像视角，再翻就错位 */
+.gesture-preview canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.poem {
+  position: fixed;
+  right: clamp(18px, 3vw, 42px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  display: grid;
+  gap: 18px;
+  color: rgba(233, 248, 246, 0.56);
+  writing-mode: vertical-rl;
+  letter-spacing: 0.34em;
+  font-size: 15px;
+  text-shadow: 0 0 20px rgba(46, 230, 207, 0.2);
+}
+
+.poem span {
+  padding: 14px 7px;
+  border-right: 1px solid rgba(245, 207, 58, 0.22);
+}
+
+.loading {
+  position: fixed;
+  left: 50%;
+  bottom: 42px;
+  z-index: 8;
+  transform: translateX(-50%);
+  color: var(--gold);
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.loading.is-hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(10px);
+  pointer-events: none;
+}
+
+@keyframes grainDrift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(-2%, 1%, 0); }
+  50% { transform: translate3d(1%, -2%, 0); }
+  75% { transform: translate3d(2%, 2%, 0); }
+}
+
+@media (max-width: 760px) {
+  .hud {
+    top: 14px;
+    padding: 16px 18px;
+  }
+
+  .verse { margin: 14px 0; }
+
+  .poem { display: none; }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .gesture-preview {
+    width: 128px;
+  }
+}
