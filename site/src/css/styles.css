@@ -369,20 +369,10 @@ button.ghost {
   border-right: 1px solid rgba(245, 207, 58, 0.22);
 }
 
-/* 三句各自染上词意之色，配柔光晕，在粒子背景上清晰可读 */
-.poem span:nth-child(1) {
-  color: #4df0d8; /* 石青入峰 */
-  text-shadow: 0 0 12px rgba(46, 230, 207, 0.65), 0 0 32px rgba(46, 230, 207, 0.3);
-}
-
-.poem span:nth-child(2) {
-  color: #8fe8c9; /* 石绿生烟 */
-  text-shadow: 0 0 12px rgba(46, 200, 160, 0.6), 0 0 32px rgba(46, 200, 160, 0.28);
-}
-
-.poem span:nth-child(3) {
-  color: #ffd94a; /* 金水行谷 */
-  text-shadow: 0 0 12px rgba(245, 207, 58, 0.6), 0 0 32px rgba(245, 207, 58, 0.28);
+/* 统一金色：与金河/题跋金线同源，提亮一档保证在粒子背景上醒目 */
+.poem span {
+  color: #ffdd55;
+  text-shadow: 0 0 14px rgba(245, 207, 58, 0.7), 0 0 36px rgba(245, 207, 58, 0.32);
 }
 
 .loading {
