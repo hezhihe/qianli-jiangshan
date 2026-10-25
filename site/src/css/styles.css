@@ -230,6 +230,61 @@ button.ghost {
   background: rgba(46, 230, 207, 0.06);
 }
 
+/* 落款（署名 + 联系方式） */
+.colophon {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(245, 207, 58, 0.28);
+}
+
+.colophon-name {
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(233, 248, 246, 0.78);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+}
+
+.seal-dot {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #f7ecd8;
+  background: linear-gradient(160deg, #c0473a, #8f2a20);
+  border-radius: 3px;
+  box-shadow: inset 0 0 4px rgba(60, 8, 4, 0.7);
+  transform: rotate(-3deg);
+}
+
+.colophon-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+
+.colophon-links li a {
+  color: rgba(245, 207, 58, 0.72);
+  text-decoration: none;
+  font: 11px/1.8 "Segoe UI", sans-serif;
+  letter-spacing: 0.06em;
+  border-bottom: 1px dotted rgba(245, 207, 58, 0.4);
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.colophon-links li a:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
 /* 手势控制 */
 .music-btn {
   width: 100%;

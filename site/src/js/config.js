@@ -59,6 +59,17 @@ export const QIANLI_CONFIG = Object.freeze({
     defaultRotationY: 0.02
   },
 
+  // 落款：作品署名与联系方式（国画"题款钤印"传统，改为你的真实信息即可）
+  colophon: {
+    name: '你的名字',
+    year: '丙午年',   // 干支纪年，也可写 2026
+    links: [
+      { label: 'GitHub', value: 'github.com/yourname', href: 'https://github.com/yourname' },
+      { label: '邮箱', value: 'you@example.com', href: 'mailto:you@example.com' },
+      { label: '微信', value: 'your-wechat-id', copy: true }
+    ]
+  },
+
   interaction: {
     rippleSpeed: 22.0, // 墨晕扩散速度（世界单位/秒）
     rippleStrength: 6.5,

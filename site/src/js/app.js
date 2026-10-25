@@ -271,6 +271,9 @@ class QianliParticleApp {
       });
     }
 
+    // 落款（署名 + 联系方式）
+    this.renderColophon();
+
     // 手势控制：点击才加载模块并请求摄像头
     this.gesture = null;
     document.querySelector('#gesture-btn')?.addEventListener('click', () => this.toggleGestures());
@@ -329,6 +332,32 @@ class QianliParticleApp {
       }
     };
     this.fadeRaf = requestAnimationFrame(step);
+  }
+
+  renderColophon() {
+    const colophon = this.config.colophon;
+    if (!colophon) return;
+    document.querySelector('#colophon-name').textContent = colophon.name;
+    document.querySelector('#colophon-year').textContent = colophon.year;
+    const links = document.querySelector('#colophon-links');
+    links.replaceChildren(
+      ...colophon.links.map((link) => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = link.href || 'javascript:void(0)';
+        a.textContent = `${link.label} · ${link.value}`;
+        a.addEventListener('click', (event) => {
+          if (link.copy) {
+            event.preventDefault();
+            this.copyText(link.value, `${link.label} 已复制：${link.value}`);
+          } else if (!link.href) {
+            event.preventDefault();
+          }
+        });
+        li.appendChild(a);
+        return li;
+      })
+    );
   }
 
   toggleGestures() {
