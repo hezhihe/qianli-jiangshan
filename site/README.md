@@ -1,5 +1,8 @@
 # 千里江山 · 粒子山河（Vibe Coding 创意作品）
 
+**线上地址：https://qianli-jiangshan.pages.dev**（Cloudflare Pages）
+后续更新：改完代码在 site/ 目录执行 `/Users/LEGION/.zcode/tools/wrangler-env/node_modules/.bin/wrangler pages deploy . --project-name qianli-jiangshan`
+
 Three.js 粒子山水沉浸页。无构建依赖，静态部署即可。
 **纯创意作品，不含任何个人信息**（无姓名/联系方式/二维码）。
 
