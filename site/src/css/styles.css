@@ -359,16 +359,30 @@ button.ghost {
   z-index: 4;
   display: grid;
   gap: 18px;
-  color: rgba(233, 248, 246, 0.56);
   writing-mode: vertical-rl;
   letter-spacing: 0.34em;
-  font-size: 15px;
-  text-shadow: 0 0 20px rgba(46, 230, 207, 0.2);
+  font-size: 16px;
 }
 
 .poem span {
   padding: 14px 7px;
   border-right: 1px solid rgba(245, 207, 58, 0.22);
+}
+
+/* 三句各自染上词意之色，配柔光晕，在粒子背景上清晰可读 */
+.poem span:nth-child(1) {
+  color: #4df0d8; /* 石青入峰 */
+  text-shadow: 0 0 12px rgba(46, 230, 207, 0.65), 0 0 32px rgba(46, 230, 207, 0.3);
+}
+
+.poem span:nth-child(2) {
+  color: #8fe8c9; /* 石绿生烟 */
+  text-shadow: 0 0 12px rgba(46, 200, 160, 0.6), 0 0 32px rgba(46, 200, 160, 0.28);
+}
+
+.poem span:nth-child(3) {
+  color: #ffd94a; /* 金水行谷 */
+  text-shadow: 0 0 12px rgba(245, 207, 58, 0.6), 0 0 32px rgba(245, 207, 58, 0.28);
 }
 
 .loading {
