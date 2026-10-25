@@ -262,6 +262,15 @@ button.ghost {
   transform: rotate(-3deg);
 }
 
+.colophon-connect {
+  margin: 0 0 6px;
+  color: var(--gold);
+  font: 10px/1 "Segoe UI", sans-serif;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
 .colophon-links {
   list-style: none;
   margin: 0;

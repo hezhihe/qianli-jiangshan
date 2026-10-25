@@ -61,12 +61,12 @@ export const QIANLI_CONFIG = Object.freeze({
 
   // 落款：作品署名与联系方式（国画"题款钤印"传统，改为你的真实信息即可）
   colophon: {
-    name: '你的名字',
+    name: '陳赫楊',
     year: '丙午年',   // 干支纪年，也可写 2026
     links: [
-      { label: 'GitHub', value: 'github.com/yourname', href: 'https://github.com/yourname' },
-      { label: '邮箱', value: 'you@example.com', href: 'mailto:you@example.com' },
-      { label: '微信', value: 'your-wechat-id', copy: true }
+      { label: '微信', value: 'hz141681', copy: true },
+      { label: '邮箱', value: 'chy313336@qq.com', href: 'mailto:chy313336@qq.com' },
+      { label: 'GitHub', value: '敬请期待', href: '' } // GitHub 地址确定后改成 value: 'github.com/xxx', href: 'https://github.com/xxx'
     ]
   },
 
