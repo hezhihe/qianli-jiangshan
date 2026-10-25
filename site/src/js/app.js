@@ -405,18 +405,6 @@ class QianliParticleApp {
         });
         li.appendChild(main);
 
-        // 有地址的项加一个“打开”小入口（新标签页）
-        if (link.href) {
-          const open = document.createElement('a');
-          open.href = link.href;
-          open.target = '_blank';
-          open.rel = 'noopener noreferrer';
-          open.className = 'link-open';
-          open.title = `打开 ${link.label}`;
-          open.textContent = '↗';
-          open.setAttribute('aria-label', `打开 ${link.label}`);
-          li.appendChild(open);
-        }
         return li;
       })
     );

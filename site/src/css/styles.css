@@ -294,18 +294,6 @@ button.ghost {
   border-bottom-color: var(--gold);
 }
 
-/* 打开入口：小箭头，与复制主体拉开间距 */
-.colophon-links li a.link-open {
-  margin-left: 4px;
-  color: rgba(46, 230, 207, 0.6);
-  text-decoration: none;
-  font: 10px/1.8 "Segoe UI", sans-serif;
-  transition: color 180ms ease;
-}
-
-.colophon-links li a.link-open:hover {
-  color: var(--cyan-stone);
-}
 
 /* 手势控制 */
 .music-btn {
