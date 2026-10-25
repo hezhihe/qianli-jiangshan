@@ -235,6 +235,16 @@ class QianliParticleApp {
         this.musicBtn.textContent = '♪ 音乐文件未找到';
         this.musicBtn.disabled = true;
       });
+      // 状态自愈：任何路径开始播放时，静音且无淡变进行 => 恢复默认音量（防"静音播放"假死）
+      this.bgm.addEventListener('play', () => {
+        if (!this.fadeRaf && this.bgm.volume === 0) {
+          this.bgm.volume = this.config.audio.volume;
+        }
+        this.musicBtn.textContent = '♪ 暂停音乐';
+      });
+      this.bgm.addEventListener('pause', () => {
+        if (!this.fadeRaf) this.musicBtn.textContent = '♪ 播放背景音乐';
+      });
       this.musicBtn.addEventListener('click', () => this.toggleMusic());
       // 自动播放：能直接播就淡入；被浏览器拦截则在首次任意交互时立即起播。
       // 音乐按钮自身的点击交给 toggleMusic，避免 pointerdown/click 双触发。
