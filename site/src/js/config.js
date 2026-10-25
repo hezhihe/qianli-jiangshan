@@ -65,8 +65,8 @@ export const QIANLI_CONFIG = Object.freeze({
     year: '丙午年',   // 干支纪年，也可写 2026
     links: [
       { label: '微信', value: 'hz141681', copy: true },
-      { label: '邮箱', value: 'chy313336@qq.com', href: 'mailto:chy313336@qq.com' },
-      { label: 'GitHub', value: 'github.com/hezhihe', href: 'https://github.com/hezhihe' }
+      { label: '邮箱', value: 'chy313336@qq.com', href: 'mailto:chy313336@qq.com', copy: true },
+      { label: 'GitHub', value: 'github.com/hezhihe', href: 'https://github.com/hezhihe', copy: true }
     ]
   },
 

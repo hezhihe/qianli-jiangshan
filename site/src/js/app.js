@@ -394,18 +394,29 @@ class QianliParticleApp {
     links.replaceChildren(
       ...colophon.links.map((link) => {
         const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = link.href || 'javascript:void(0)';
-        a.textContent = `${link.label} · ${link.value}`;
-        a.addEventListener('click', (event) => {
-          if (link.copy) {
-            event.preventDefault();
-            this.copyText(link.value, `${link.label} 已复制：${link.value}`);
-          } else if (!link.href) {
-            event.preventDefault();
-          }
+
+        // 主体：点击复制
+        const main = document.createElement('a');
+        main.href = 'javascript:void(0)';
+        main.className = 'link-copy';
+        main.textContent = `${link.label} · ${link.value}`;
+        main.addEventListener('click', () => {
+          this.copyText(link.value, `${link.label} 已复制：${link.value}`);
         });
-        li.appendChild(a);
+        li.appendChild(main);
+
+        // 有地址的项加一个“打开”小入口（新标签页）
+        if (link.href) {
+          const open = document.createElement('a');
+          open.href = link.href;
+          open.target = '_blank';
+          open.rel = 'noopener noreferrer';
+          open.className = 'link-open';
+          open.title = `打开 ${link.label}`;
+          open.textContent = '↗';
+          open.setAttribute('aria-label', `打开 ${link.label}`);
+          li.appendChild(open);
+        }
         return li;
       })
     );
