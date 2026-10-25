@@ -334,6 +334,57 @@ class QianliParticleApp {
     this.fadeRaf = requestAnimationFrame(step);
   }
 
+  copyText(value, message) {
+    const done = () => this.showToast(message);
+    if (navigator.clipboard?.writeText && document.hasFocus?.()) {
+      // 剪贴板 API 在部分内嵌环境会挂起，600ms 未返回就走兜底方案
+      let settled = false;
+      const timeout = window.setTimeout(() => {
+        if (settled) return;
+        settled = true;
+        this.fallbackCopy(value, done);
+      }, 600);
+      navigator.clipboard.writeText(value).then(() => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timeout);
+        done();
+      }, () => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timeout);
+        this.fallbackCopy(value, done);
+      });
+    } else {
+      this.fallbackCopy(value, done);
+    }
+  }
+
+  fallbackCopy(value, done) {
+    const input = document.createElement('textarea');
+    input.value = value;
+    input.style.position = 'fixed';
+    input.style.opacity = '0';
+    document.body.appendChild(input);
+    input.select();
+    try {
+      document.execCommand('copy');
+      done();
+    } catch (error) {
+      this.showToast('复制失败，请手动复制');
+    }
+    input.remove();
+  }
+
+  showToast(message) {
+    const toast = document.querySelector('#toast');
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add('show');
+    window.clearTimeout(this.toastTimer);
+    this.toastTimer = window.setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
   renderColophon() {
     const colophon = this.config.colophon;
     if (!colophon) return;

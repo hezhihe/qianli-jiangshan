@@ -375,6 +375,29 @@ button.ghost {
   text-shadow: 0 0 14px rgba(245, 207, 58, 0.7), 0 0 36px rgba(245, 207, 58, 0.32);
 }
 
+/* 复制成功 Toast */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 64px;
+  z-index: 20;
+  transform: translateX(-50%) translateY(14px);
+  padding: 10px 22px;
+  border: 1px solid rgba(245, 207, 58, 0.5);
+  background: rgba(0, 6, 11, 0.92);
+  color: var(--gold);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 260ms ease, transform 260ms ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 .loading {
   position: fixed;
   left: 50%;

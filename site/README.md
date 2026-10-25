@@ -51,7 +51,8 @@ python3 serve.py 8899
 - **自动播放**：进页面即尝试起播；首次访问被浏览器拦截时，页面内第一次点击（点山河/任意按钮）立即起播
 - 手动按钮：点击 1.6 秒淡入至音量 0.55；再点 0.9 秒淡出后暂停；循环播放
 - 文件缺失时按钮自动变为"音乐文件未找到"并禁用
-- 换歌：替换 `assets/zhiwo.mp3`，或改 `index.html` 里 `#bgm` 的 `src`
+- 换歌：替换 `assets/zhiwo.m4a`（或改 `index.html` 里 `#bgm` 的 `src`）
+- 落款署名：`src/js/config.js` 的 `colophon` 区块（微信点击复制/邮箱 mailto/GitHub 链接）
 - 音量在 `src/js/app.js` 的 `toggleMusic()` 里调（0.55）
 
 ## 手势控制（MediaPipe Hands）
