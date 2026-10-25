@@ -66,7 +66,7 @@ export const QIANLI_CONFIG = Object.freeze({
     links: [
       { label: '微信', value: 'hz141681', copy: true },
       { label: '邮箱', value: 'chy313336@qq.com', href: 'mailto:chy313336@qq.com' },
-      { label: 'GitHub', value: '敬请期待', href: '' } // GitHub 地址确定后改成 value: 'github.com/xxx', href: 'https://github.com/xxx'
+      { label: 'GitHub', value: 'github.com/hezhihe', href: 'https://github.com/hezhihe' }
     ]
   },
 
