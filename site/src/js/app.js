@@ -283,9 +283,12 @@ class QianliParticleApp {
   toggleMusic() {
     this.musicTouched = true;
     if (this.bgm.paused) {
-      this.musicBtn.textContent = '♪ 暂停音乐';
-      this.fadeMusic(this.config.audio.volume, this.config.audio.fadeInMs);
-      this.bgm.play().catch(() => {
+      this.musicBtn.textContent = '♪ 加载中…';
+      // 真正出声（readyState>=2 且未暂停）才切换到"暂停"状态，避免"点了没反应"
+      this.bgm.play().then(() => {
+        this.musicBtn.textContent = '♪ 暂停音乐';
+        this.fadeMusic(this.config.audio.volume, this.config.audio.fadeInMs);
+      }).catch(() => {
         // 缺文件时 error 监听已把按钮禁用，这里只复位可用的按钮
         if (!this.musicBtn.disabled) {
           this.musicBtn.textContent = '♪ 播放背景音乐';
