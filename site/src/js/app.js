@@ -253,6 +253,8 @@ class QianliParticleApp {
         this.musicBtn.textContent = '♪ 暂停音乐';
         this.fadeMusic(this.config.audio.volume, this.config.audio.fadeInMs);
       }).catch(() => {
+        // 自动播放被拦：明确告诉访客点一下即可开启
+        this.musicBtn.textContent = '♪ 点击任意处开启音乐';
         const startOnGesture = (event) => {
           if (event.target && event.target.closest && event.target.closest('#music-btn')) return;
           window.removeEventListener('pointerdown', startOnGesture);
